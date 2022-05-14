@@ -1,17 +1,24 @@
-names = ['Акакий', 'Геродот', 'Аристотель', 'Птолемей', 'Декарт', 'Цезарь']
-salaries = [129, 341, 933, 792, 124356, 45]
-data = dict(zip(names, salaries))
+import random
 
-with open('salary.txt', mode='w', encoding='utf-8') as no_tax:
-    for key, val in data.items():
-        if val <= 50000:
-            print(f'{key} - {val}', file=no_tax)
 
-with open('salary.txt', encoding='utf-8') as no_tax:
-    zp = no_tax.readlines()
+def attack(person1, person2):
+    while person1['health'] > 0 or person2['health'] > 0:
+        lucky_coin = random.randint(0, 1)
+        if lucky_coin == 0:
+            person1['health'] -= person2['damage']
+        else:
+            person2['health'] -= person1['damage']
 
-for inf in zp:
-    name = inf.strip().split(' - ')[0]
-    start_salar = int(inf.strip().split(' - ')[1])
-    salar = start_salar - start_salar * 0.13
-    print(f'{name.upper()} - {salar}')
+
+player = {
+    'name': input(),
+    'health': 100,
+    'damage': 25
+}
+enemy = {
+    'name': 'Orc',
+    'health': 130,
+    'damage': 18
+}
+
+print(player)
