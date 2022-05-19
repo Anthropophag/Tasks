@@ -1,0 +1,4 @@
+name input()
+health 100
+damage 25
+armor 1.2

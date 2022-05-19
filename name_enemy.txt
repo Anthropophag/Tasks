@@ -1,0 +1,4 @@
+name Orc
+health 130
+damage 18
+armor 1.2
