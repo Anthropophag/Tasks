@@ -1,13 +1,11 @@
 import random
 
-numbers = []
-for i in range(random.randint(0, 1000)):
-    numbers.append(random.randint(0, 1000000))
 
-for ind in range(len(numbers)):
-    numbers[ind] = numbers[ind] ** 2
+
+numbers = [random.randint(0, 1000) for i in range(random.randint(0, 1000))]
+sqr_numbers = [j ** 2 for j in numbers]
 print(numbers)
-
+print(sqr_numbers)
 
 
 
