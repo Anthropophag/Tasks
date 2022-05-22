@@ -1,20 +1,11 @@
-import random
+fruit_basket_1 = ['яблоко', 'груша', 'маракуя', "банан"]
+fruit_basket_2 = ['личи', 'арбуз', "банан", 'маракуя']
+fruit_basket_general = []
 
-numbers = []
-for i in range(random.randint(0, 1000)):
-    numbers.append(random.randint(0, 1000000))
-
-for ind in range(len(numbers)):
-    numbers[ind] = numbers[ind] ** 2
-print(numbers)
-
-
-
-
-
-
-
-
+for fruit in fruit_basket_1:
+    if fruit in fruit_basket_2:
+        fruit_basket_general.append(fruit)
+print(fruit_basket_general)
 
 
 
