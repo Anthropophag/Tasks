@@ -1,12 +1,12 @@
 import random
 
-
-
 numbers = [random.randint(0, 1000) for i in range(random.randint(0, 1000))]
-sqr_numbers = [j ** 2 for j in numbers]
+new_numbers = [i for i in numbers
+               if i % 3 == 0 and
+               i > 0 and
+               i % 4 != 0]
 print(numbers)
-print(sqr_numbers)
-
+print(new_numbers)
 
 
 
