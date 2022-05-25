@@ -1,25 +1,14 @@
 import re
 
+with open('input.txt', mode='r', encoding='utf-8') as text:
+    start_text = text.readlines()
 
-def registration(NL, email):
-    patern_name = '[A-Z][a-z]+ [A-Z][a-z]+'
-    patern_email = '[a-z0-9_\.]+@[a-z0-9]+\.[com|org|ru]+'
-    count = 0
-    while count == 0:
-        if re.match(patern_name, NL) is None:
-            NL = input('Имия или фомилия введены неверно, повторите попытку: ')
-        else:
-            print('Имя и фамилия введены верно')
-            count += 1
-    count = 0
-    while count == 0:
-        if re.match(patern_email, email) is None:
-            email = input('email введён не правлиьлно, повторите попытку: ')
-        else:
-            print('email введён верно')
-            count += 1
+verse = ''
+for i in start_text:
+    verse = verse + i.strip()
 
-
-NL = input()
-email = input()
-registration(NL, email)
+patern = '(\.\.\.)'
+if re.search(patern, verse) is None:
+    print('В тексте нет нескольких точек подряд')
+else:
+    print('В тексте есть белее оденой точки подряд')
