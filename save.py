@@ -22,6 +22,8 @@ def check_account(person):
 
 
 def withdraw_money(person, money):
+    if money < 0:
+        return 'Не коректтно указана сумма для снятия !'
     if person['money'] - money >= 0:
         person['money'] -= money
         # return 'Вы сняли {} рублей.'.format(money)
@@ -31,26 +33,37 @@ def withdraw_money(person, money):
 
 
 def start():
-    card_number, pin_code = input('Введите номер карты и пин код через пробел: ').split()
-
-    card_number = int(card_number)
-    pin_code = int(pin_code)
-    person = get_person_by_card(card_number)
+    try:
+        card_number, pin_code = input('Введите номер карты и пин код через пробел: ').split()
+        card_number = int(card_number)
+        pin_code = int(pin_code)
+        person = get_person_by_card(card_number)
+    except ValueError:
+        print('Вы вели некоректный номер или пинкод карты !')
+        return
     if person and is_pin_valid(person, pin_code):
         while True:
-            choice = int(input('Выберите пункт:\n'
-                               '1. Проверить баланс\n'
-                               '2. Снять деньги\n'
-                               '3. Выход\n'
-                               '---------------------\n'
-                               'Ваш выбор: '))
+            try:
+                choice = int(input('Выберите пункт:\n'
+                                   '1. Проверить баланс\n'
+                                   '2. Снять деньги\n'
+                                   '3. Выход\n'
+                                   '---------------------\n'
+                                   'Ваш выбор: '))
+            except ValueError:
+                print('Неверный ввод, повторите попытку.')
+                continue
+
             if choice == 3:
                 break
             elif choice == 1:
                 print('Ваш баланс: ', check_account(person))
             elif choice == 2:
-                money = float(input('Сумма к снятию: '))
-                print(withdraw_money(person, money))
+                try:
+                    money = float(input('Сумма к снятию: '))
+                    print(withdraw_money(person, money))
+                except ValueError:
+                    print('указана некректная сумма !')
     else:
         print('Номер карты или пин код введены не верно!')
 
