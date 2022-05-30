@@ -1,52 +1,53 @@
-class Person:
-    health: int
-
-    def __init__(self):
-        self.health = 150
-        self.armor = 0
-        self.demage = 0
-
-    def _clean_damage(self):
-        return self.armor - self.demage
-
-    def attack(self, name_person):
-        if person.armor > 0:
-            uron = self._clean_damage()
-            person.armor -= uron
-            print(f'You dealt {uron} damage to an {name_person.name}')
-        else:
-            person.health += person.armor
-        if person.health > 0:
-            uron = self._clean_damage()
-            person.health -= uron
-            print(f'You dealt {uron} damage to an {name_person.name}')
-        else:
-            print(f'{person.name} defeated')
-
-
-class Player(Person):
-    def __init__(self, name: str):
-        super().__init__()
+class Toy:
+    def __init__(self, name, color, typ):
         self.name = name
-        self.demage = 15
-        self.armor = 30
-        print(f'Created player {name}')
-
-    demage = 15
-    armor = 30
+        self.color = color
+        self.typ = typ
 
 
-class Enemy(Person):
-    def __init__(self):
-        super().__init__()
-        self.name = 'Orc'
-    demage = 25
-    armor = 10
+class Factory:
+    color: object
+
+    def __init__(self, typ: str):
+        if typ != 'toy_from_mult' and typ != 'animal':
+            print('You writed wrong typ for toy')
+        self.typ = typ
+
+    def parch_materials(self):
+        match self.typ:
+            case 'toy_from_mult':
+                print('Was bought:\n'
+                      '1. filament\n'
+                      '2. stuffing material\n'
+                      '3. upholstery fabric\n'
+                      'Was сontract signed on the rights to use the character')
+                print()
+            case 'animal':
+                print('Was bought:\n'
+                      '1. filament\n'
+                      '2. stuffing material\n'
+                      '3. upholstery fabric\n'
+                      '4. artificial wool')
+                print()
+
+    def sewing(self):
+        print('Party successfully sewn')
+        print()
+
+    def coloration(self, color):
+        self.color = color
+        print(f'Toy was coloring in {color}')
+        print()
+        return color
+
+    def get_toy(self, name):
+        toy = Toy(name, self.color, self.typ)
+        print(f'Toy {toy.name} successfully create')
+        return toy
 
 
-player1 = Player('Vonerut')
-person = Enemy()
-
-player1.attack(person)
-
-print(person.health)
+factory_1 = Factory('animal')
+factory_1.parch_materials()
+factory_1.sewing()
+factory_1.coloration('blue')
+factory_1.get_toy('Chomic')
