@@ -1,53 +1,22 @@
-class Toy:
-    def __init__(self, name, color, typ):
-        self.name = name
-        self.color = color
-        self.typ = typ
-
-
-class Factory:
-    color: object
-
-    def __init__(self, typ: str):
-        if typ != 'toy_from_mult' and typ != 'animal':
-            print('You writed wrong typ for toy')
-        self.typ = typ
-
-    def parch_materials(self):
-        match self.typ:
-            case 'toy_from_mult':
-                print('Was bought:\n'
-                      '1. filament\n'
-                      '2. stuffing material\n'
-                      '3. upholstery fabric\n'
-                      'Was сontract signed on the rights to use the character')
-                print()
-            case 'animal':
-                print('Was bought:\n'
-                      '1. filament\n'
-                      '2. stuffing material\n'
-                      '3. upholstery fabric\n'
-                      '4. artificial wool')
-                print()
-
-    def sewing(self):
-        print('Party successfully sewn')
-        print()
-
-    def coloration(self, color):
-        self.color = color
-        print(f'Toy was coloring in {color}')
-        print()
-        return color
-
-    def get_toy(self, name):
-        toy = Toy(name, self.color, self.typ)
-        print(f'Toy {toy.name} successfully create')
-        return toy
-
-
-factory_1 = Factory('animal')
-factory_1.parch_materials()
-factory_1.sewing()
-factory_1.coloration('blue')
-factory_1.get_toy('Chomic')
+# 1) несмотря на возможность - не стоит давать своим объектам имена match и case
+# 2) _ - универсальный символ (wildcard), может быть добавлен в конце для отработки всех
+# остальных вариантов
+# 3) [a,b], (a,b) и a,b равнозначны, ожидается последовательность (кроме строки и байтов),
+# но не set или dict
+# 4) допустим вызов только типов (float(), str(), MyClass() и т.д.), обращения по индексу
+# недопустимы
+# 5) после паттерна может быть добавлен guard начинающийся с if, он сработает только при удачном
+# сравнении шаблона
+# 6) последовательности (sequence) проверяются строго по содержимому и размеру, маппинги (dict)
+# проверяют только конкретные вхождения ключей
+# 7) имена привязываются (bind) локально, они доступны вне контекста match, для использования в
+# нешних констант нужно использовать точку
+# 8) применяются правила распаковки
+# 9) для OR случаев должны быть привязаны одинаковые имена
+# 10)  AS позволит привязать имя даже внутри паттерна
+# 11)  проверять типы можно даже внутри паттерна и при привязке имени
+#
+# НЕЛЬЗЯ:
+# 1) писать **_ для маппингов (dict)
+# 2) вызывать свои функции или обращаться к какой то коллекции по индексу (a_list[x]) в блоке case
+# 3) привязывать разные имена при использовании OR (|)
