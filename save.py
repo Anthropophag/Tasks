@@ -1,22 +1,61 @@
-# 1) несмотря на возможность - не стоит давать своим объектам имена match и case
-# 2) _ - универсальный символ (wildcard), может быть добавлен в конце для отработки всех
-# остальных вариантов
-# 3) [a,b], (a,b) и a,b равнозначны, ожидается последовательность (кроме строки и байтов),
-# но не set или dict
-# 4) допустим вызов только типов (float(), str(), MyClass() и т.д.), обращения по индексу
-# недопустимы
-# 5) после паттерна может быть добавлен guard начинающийся с if, он сработает только при удачном
-# сравнении шаблона
-# 6) последовательности (sequence) проверяются строго по содержимому и размеру, маппинги (dict)
-# проверяют только конкретные вхождения ключей
-# 7) имена привязываются (bind) локально, они доступны вне контекста match, для использования в
-# нешних констант нужно использовать точку
-# 8) применяются правила распаковки
-# 9) для OR случаев должны быть привязаны одинаковые имена
-# 10)  AS позволит привязать имя даже внутри паттерна
-# 11)  проверять типы можно даже внутри паттерна и при привязке имени
-#
-# НЕЛЬЗЯ:
-# 1) писать **_ для маппингов (dict)
-# 2) вызывать свои функции или обращаться к какой то коллекции по индексу (a_list[x]) в блоке case
-# 3) привязывать разные имена при использовании OR (|)
+from random import randint
+
+
+class Player:
+    def __init__(self, name: str, age: int, email: str):
+        self.email = email
+        self.age = age
+        self.name = name
+
+    def _generate_index(self):
+        random_index = []
+        for _ in range(5):
+            metil = 0
+            while True:
+                random_num = randint(0, 8)
+                if random_num not in random_index:
+                    random_index.append(random_num)
+                    break
+        return random_index
+
+    def _generate_card(self):
+        card = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] for _ in range(3)]
+        for st in range(3):
+            random_index = self._generate_index()
+            for ind in random_index:
+                while True:
+                    random_num = randint(1, 90)
+                    if random_num not in card:
+                        card[st][ind] = random_num
+                        break
+        return card
+
+
+def start_play(self):
+    player_card = self._generate_card()
+    computer_card = self._generate_card()
+    barrels = [keg for keg in range(1, 91)]
+    ind = 89
+
+    random_keg = barrels[randint(0, ind)]
+    print(f'Your got keg {random_keg}')
+    print('-------Your card-------')
+    for i in player_card:
+        print(*i)
+    print('-----------------------')
+    print('-----Computer card-----')
+    for i in computer_card:
+        print(*i)
+    print('-----------------------')
+    choice = input('Cross out a number?\n'
+                   '    y / n\n'
+                   'Your choice: ')
+    match choice:
+        case 'y':
+            if random_keg in player_card:
+
+
+
+if __name__ == '__main__':
+    chel = Player('wrtwt', 34, 'sgf')
+    start_play(chel)
