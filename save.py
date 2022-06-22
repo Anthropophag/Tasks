@@ -1,21 +1,23 @@
-count_row = 0
-while True:
-    try:
-        count_row += 1
-        mags = []
-        withes = []
-        wizards = input()
-        match count_row % 2:
-            case 0:
-                for i in wizards.split():
-                    if i[0] == '3':
-                        mags.append(i)
-                print(*mags, sep='_')
-            case 1:
-                for i in wizards.split():
-                    i = int(i)
-                    if i - i // 10 * 10 == 7:
-                        withes.append(i)
-                print(*withes, sep='_')
-    except EOFError:
-        break
+from PIL import Image
+
+
+def hex_to_rgb(s):
+    s = s.lstrip("#")
+    return tuple([int(s[i:i + 2], 16) for i in range(0, 5, 2)])
+
+
+def crab_alien(picture_name: str, file_for_save: str, **colors):
+    img = Image.open(picture_name)
+    img.transpose(Image.FLIP_LEFT_RIGHT).transpose(Image.ROTATE_90).save('rotate_crab.png')
+    img2 = Image.open('rotate_crab.png')
+    for key, value in colors:
+
+
+if __name__ == '__main__':
+    crab_alien(
+        'start_crab.png',
+        'pythonProject3',
+        fb97ab=(240, 221, 207),
+        f6d9c5=(209, 151, 35),
+        d9d9f8=(155, 216, 237),
+    )
