@@ -1,23 +1,17 @@
-from PIL import Image
+words = input().split(' : ')
+short = []
+lrong = []
+with_letter = []
+for word in words:
+    if len(word) < 4:
+        short.append(word.lower())
+    if len(word) > 7:
+        lrong.append(word)
+    if 'w' in word:
+        with_letter.append(word.lower().capitalize())
 
-
-def hex_to_rgb(s):
-    s = s.lstrip("#")
-    return tuple([int(s[i:i + 2], 16) for i in range(0, 5, 2)])
-
-
-def crab_alien(picture_name: str, file_for_save: str, **colors):
-    img = Image.open(picture_name)
-    img.transpose(Image.FLIP_LEFT_RIGHT).transpose(Image.ROTATE_90).save('rotate_crab.png')
-    img2 = Image.open('rotate_crab.png')
-    for key, value in colors:
-
-
-if __name__ == '__main__':
-    crab_alien(
-        'start_crab.png',
-        'pythonProject3',
-        fb97ab=(240, 221, 207),
-        f6d9c5=(209, 151, 35),
-        d9d9f8=(155, 216, 237),
-    )
+print(
+    f'Short: {short}\n'
+    f'Long: {lrong.sort()}\n',
+    f'With letter: {with_letter}',
+)
